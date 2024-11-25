@@ -47,11 +47,14 @@ contatolabel.place(x=320,y=200)
 contatoentry = Entry(tela,width=36)
 contatoentry.place(x=425,y=212)
 
+contatoinfo = Label(tela, text="Separe os números por vírgula", font=("Sans-Serif",10),bg="#25D366", fg="white")
+contatoinfo.place(x=435, y=240)
+
 vezeslabel = Label(tela, text="Nº Vezes:", font=("Sans-Serif",20),bg="#25D366", fg="white")
-vezeslabel.place(x=320,y=250)
+vezeslabel.place(x=320,y=280)
 
 vezesentry = Spinbox(tela,width=31 ,from_=1, to=100)
-vezesentry.place(x=445,y=262)
+vezesentry.place(x=445,y=292)
 
 def start():
     mensagem = mensagementry.get()
@@ -70,7 +73,14 @@ def start():
     except ValueError:
         print("Por favor, insira um número válido para a quantidade.")
         return
-    print(f"Mensagem: {mensagem}, Contato: {numero}, Nº de vezes: {quantidade}")
+
+     # Divida os contatos por vírgula e remova espaços em branco
+    lista_contatos = [numero.strip() for numero in numero.split(",")]    
+
+    print(f"Enviando mensagem para os contatos: {lista_contatos}")
+    for numero in lista_contatos:
+        print(f"Enviando para {numero}...")
+    
 
 botaolabel = Button(tela,text='Start',width=20,command=start)
 botaolabel.place(x=600,y=540)
